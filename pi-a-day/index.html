@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pi-a-day &mdash; sintaxsaint</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">sintax<span>saint</span></a>
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="../board-of-sins/index.html">Board of Sins</a>
+    <a class="nav-link active" href="index.html">pi-a-day</a>
+  </nav>
+
+  <main>
+    <div class="pi-header">
+      <div class="date-badge">&#127851; Raspberry Pi</div>
+      <div class="pi-symbol">&#960;</div>
+      <h1>pi-a-day</h1>
+      <p>
+        AI-assisted community documentation for Raspberry Pi bootloaders &amp; boot processes &mdash;
+        because the Foundation's docs don't always keep up.
+      </p>
+      <div class="btn-group" style="justify-content:center;margin-top:1.5rem">
+        <button class="btn btn-primary" onclick="openOverlay()">Live Site &rarr;</button>
+        <a class="btn btn-outline" href="https://github.com/sintaxsaint/pi-a-day" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:2.5rem">What it does</div>
+    <div class="fun-facts">
+
+      <div class="fact-card">
+        <h3>Scrapes community sources</h3>
+        <p>Pulls from Raspberry Pi forums, GitHub discussions, DeepWiki, and other community docs — each source capped at 6,000 characters, with Wayback Machine fallback if a URL goes down.</p>
+      </div>
+
+      <div class="fact-card">
+        <h3>AI-generated report</h3>
+        <p>Feeds the scraped text into MiniMax M2.5 via the HuggingFace inference router (max 4,096 tokens, temperature 0.3) to produce a structured Markdown report on Pi bootloader development.</p>
+      </div>
+
+      <div class="fact-card">
+        <h3>Card-based live site</h3>
+        <p>Builds a dark-themed card grid at <a href="https://pi-a-day.pages.dev" target="_blank" rel="noopener" style="color:var(--pi)">pi-a-day.pages.dev</a> — one card per Pi model, each linking to its full report. Currently covers Pi 5.</p>
+      </div>
+
+      <div class="fact-card">
+        <h3>Report a missing Pi</h3>
+        <p>Users can flag Pi models that haven't been documented yet. The pipeline picks them up and generates a report on the next run.</p>
+      </div>
+
+      <div class="fact-card">
+        <h3>Auto-deploys</h3>
+        <p>Commits the generated HTML to GitHub and Cloudflare Pages rebuilds automatically. No manual deploy steps.</p>
+      </div>
+
+      <div class="fact-card">
+        <h3>State tracking</h3>
+        <p>Keeps a <code style="color:inherit;font-family:monospace">state.json</code> so each Pi model is only processed once unless you pass <code style="color:inherit;font-family:monospace">--force</code>.</p>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2.5rem">What the report covers</div>
+    <ul class="sin-list">
+
+      <li class="sin-item" style="border-left-color:var(--pi)">
+        <div class="sin-number" style="color:var(--pi)">01</div>
+        <div class="sin-content">
+          <h3>Pi 5 Boot Sequence</h3>
+          <p>ROM &rarr; EEPROM bootloader &rarr; config &rarr; kernel. How the BCM2712 SoC actually starts up.</p>
+        </div>
+      </li>
+
+      <li class="sin-item" style="border-left-color:var(--pi)">
+        <div class="sin-number" style="color:var(--pi)">02</div>
+        <div class="sin-content">
+          <h3>EEPROM &amp; rpi-eeprom utility</h3>
+          <p>How to read, update, and manage the EEPROM bootloader on a Pi 5 without bricking it.</p>
+        </div>
+      </li>
+
+      <li class="sin-item" style="border-left-color:var(--pi)">
+        <div class="sin-number" style="color:var(--pi)">03</div>
+        <div class="sin-content">
+          <h3>kernel_2712.img naming</h3>
+          <p>Why the Pi 5 kernel image has a different name &mdash; tied to the BCM2712 SoC &mdash; and what that means for bare-metal work.</p>
+        </div>
+      </li>
+
+      <li class="sin-item" style="border-left-color:var(--pi)">
+        <div class="sin-number" style="color:var(--pi)">04</div>
+        <div class="sin-content">
+          <h3>UART &amp; serial console changes</h3>
+          <p>The default serial console moved from GPIO 14/15 to a dedicated connector (ttyS11 instead of ttyS0) on the Pi 5.</p>
+        </div>
+      </li>
+
+      <li class="sin-item" style="border-left-color:var(--pi)">
+        <div class="sin-number" style="color:var(--pi)">05</div>
+        <div class="sin-content">
+          <h3>Bare-metal development</h3>
+          <p>Notes on using the Circle framework, <code style="color:inherit;font-family:monospace">kernel_address=0x80000</code>, and what differs from Pi 4 bare-metal setups.</p>
+        </div>
+      </li>
+
+      <li class="sin-item" style="border-left-color:var(--pi)">
+        <div class="sin-number" style="color:var(--pi)">06</div>
+        <div class="sin-content">
+          <h3>Known documentation gaps</h3>
+          <p>PCIe boot, firmware video limits, and other areas where the official docs are still incomplete or wrong.</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="section-label" style="margin-top:2.5rem">Usage</div>
+    <div class="pi-digits">
+      <span class="pi-label">CLI</span>
+      python main.py [huggingface_token]<br>
+      &nbsp;&nbsp;--pi=NAME&nbsp;&nbsp;&nbsp;&nbsp;Target a specific Pi model (default: pi5)<br>
+      &nbsp;&nbsp;--force&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regenerate even if already done<br>
+      &nbsp;&nbsp;--no-push&nbsp;&nbsp;&nbsp;&nbsp;Build locally, don't push to GitHub
+    </div>
+
+    <div class="section-label" style="margin-top:2rem">Stack</div>
+    <div class="stack-pills">
+      <span class="pill">Python</span>
+      <span class="pill">HTML</span>
+      <span class="pill">HuggingFace API</span>
+      <span class="pill">MiniMax M2.5</span>
+      <span class="pill">Cloudflare Pages</span>
+      <span class="pill">GitHub Actions</span>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; <script>document.write(new Date().getFullYear())</script> sintaxsaint &mdash;
+    <a href="https://github.com/sintaxsaint" target="_blank" rel="noopener">github.com/sintaxsaint</a>
+  </footer>
+
+  <div id="site-overlay" class="site-overlay" onclick="closeOverlay()">
+    <button class="overlay-close" onclick="closeOverlay()">&times;</button>
+    <iframe id="overlay-frame" src="" title="pi-a-day live site"></iframe>
+  </div>
+
+  <script>
+    function openOverlay() {
+      const overlay = document.getElementById('site-overlay');
+      document.getElementById('overlay-frame').src = 'https://pi-a-day.pages.dev';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeOverlay() {
+      document.getElementById('site-overlay').classList.remove('open');
+      document.getElementById('overlay-frame').src = '';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+  </script>
+
+</body>
+</html>

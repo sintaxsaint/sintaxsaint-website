@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board of Sins &mdash; sintaxsaint</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">sintax<span>saint</span></a>
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link active" href="index.html">Board of Sins</a>
+    <a class="nav-link" href="../pi-a-day/index.html">pi-a-day</a>
+  </nav>
+
+  <main>
+    <div class="sins-header">
+      <h1>&#128308; Board of Sins</h1>
+      <p>
+        A single-board computer designed to outperform the Raspberry Pi 5 at a comparable price.
+        Everything the Pi does. And more.
+      </p>
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('overview', this)">Overview</button>
+        <button class="tab-btn" onclick="switchTab('docs', this)">Documentation</button>
+      </div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="tab-overview" class="tab-content">
+
+      <div class="section-label">What it is</div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">&#128736;</div>
+          <h3>Rockchip RK3588</h3>
+          <p>8-core big.LITTLE CPU (4x A76 + 4x A55), Mali-G610 GPU, 8nm TSMC process. Built-in 6 TOPS NPU, expandable to 26 TOPS via M.2 AI accelerator.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#129504;</div>
+          <h3>Up to 32GB RAM</h3>
+          <p>LPDDR4/LPDDR4X on a 64-bit dual-channel bus. Four tiers from 4GB to 32GB. The Pi 5 tops out at 16GB.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128176;</div>
+          <h3>Transparent pricing</h3>
+          <p>Cost-plus 1.5x markup. No hidden margins. Starting at ~&pound;100 for the 4GB model, scaling down in price as volume grows.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128268;</div>
+          <h3>Full HAT compatibility</h3>
+          <p>Standard 40-pin GPIO header with Raspberry Pi-compatible pinout and voltage levels. Your existing HATs will work.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#9889;</div>
+          <h3>PCIe 3.0 x4</h3>
+          <p>Onboard M.2 M-Key slot with PCIe 3.0 x4 — for NVMe SSDs or AI accelerator cards. No extra HAT required, unlike the Pi 5.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128286;</div>
+          <h3>Graceful shutdown</h3>
+          <p>Onboard supercapacitor backup maintains power long enough to safely close files and shut down on sudden power loss.</p>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:2.5rem">Model lineup</div>
+      <div class="model-table-wrap">
+        <table class="model-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>RAM</th>
+              <th>Retail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Base</td><td>4GB LPDDR4</td><td>~&pound;100</td></tr>
+            <tr><td>Mid</td><td>8GB LPDDR4</td><td>~&pound;130</td></tr>
+            <tr><td>High</td><td>16GB LPDDR4</td><td>~&pound;175</td></tr>
+            <tr><td>Ultra</td><td>32GB LPDDR4</td><td>~&pound;240</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-label" style="margin-top:2.5rem">Status</div>
+      <div class="wip-box">
+        <div class="wip-icon">&#9881;</div>
+        <h2>In development</h2>
+        <p>PCB design and prototyping phase. See the Documentation tab for the full technical spec and roadmap.</p>
+      </div>
+
+    </div>
+
+    <!-- DOCUMENTATION TAB -->
+    <div id="tab-docs" class="tab-content" style="display:none">
+
+      <div class="doc-header">
+        <span class="doc-version">v0.1 Draft &mdash; Board of Sins Technical Specification</span>
+      </div>
+
+      <div class="section-label">Plan of Action</div>
+      <div class="roadmap">
+
+        <div class="roadmap-phase">
+          <div class="phase-marker active">1</div>
+          <div class="phase-body">
+            <h3>Phase 1 &mdash; PCB Design &amp; Prototype</h3>
+            <ul class="phase-items">
+              <li>Design schematic in EasyEDA based on RK3588 reference design</li>
+              <li>Route PCB &mdash; LPDDR4, USB high-speed, and HDMI differential pairs</li>
+              <li>Validate against Rockchip design guidelines</li>
+              <li>Send for prototype fabrication</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="roadmap-phase">
+          <div class="phase-marker">2</div>
+          <div class="phase-body">
+            <h3>Phase 2 &mdash; Production &amp; Public Launch</h3>
+            <ul class="phase-items">
+              <li>Professional PCB assembly &mdash; not hand-soldered</li>
+              <li>Volume component purchasing to drive down BOM cost</li>
+              <li>Public launch at ~&pound;100 retail</li>
+              <li>Scale volume to reduce price toward and below Raspberry Pi pricing</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-label" style="margin-top:2.5rem">Open items</div>
+      <ul class="sin-list">
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>RAM part number</h3>
+            <p>Final validated LPDDR4 chip TBD &mdash; need high-density package under &pound;10 at volume.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>PMIC selection</h3>
+            <p>RK806 likely &mdash; pending schematic phase.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>AI accelerator card</h3>
+            <p>M.2 card selection TBD &mdash; Hailo-8 or equivalent targeting ~20 TOPS.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>Wi-Fi module</h3>
+            <p>Module selection pending &mdash; must support AP + station mode simultaneously.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>Form factor &amp; thermal solution</h3>
+            <p>PCB dimensions TBD during layout phase. Active vs passive cooling pending &mdash; RK3588 runs warm under full load.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>OS distribution</h3>
+            <p>Custom Debian/Ubuntu image planned for pre-install on included MicroSD.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="section-label" style="margin-top:2.5rem">SoC &mdash; Rockchip RK3588</div>
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <tbody>
+            <tr><td>Architecture</td><td>4x Cortex-A76 (up to 2.4GHz) + 4x Cortex-A55 (up to 1.8GHz)</td></tr>
+            <tr><td>Process</td><td>8nm TSMC</td></tr>
+            <tr><td>GPU</td><td>Mali-G610 MP4 &mdash; OpenGL ES 3.2, Vulkan 1.1, OpenCL 2.0</td></tr>
+            <tr><td>NPU</td><td>6 TOPS (INT4/INT8/INT16/FP16) &mdash; RKNN supported</td></tr>
+            <tr><td>Memory bus</td><td>64-bit dual channel, up to 32GB LPDDR4/LPDDR5</td></tr>
+            <tr><td>Video decode</td><td>8K@60fps H.265/H.264/AV1/VP9</td></tr>
+            <tr><td>PCIe</td><td>PCIe 3.0 x4 + PCIe 2.0 x1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-label" style="margin-top:2.5rem">vs Raspberry Pi 5 (8GB)</div>
+      <div class="spec-table-wrap">
+        <table class="spec-table comparison">
+          <thead>
+            <tr><th>Feature</th><th>Pi 5 (8GB)</th><th>Board of Sins (4GB Base)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>CPU</td><td>4x A76 @ 2.4GHz</td><td>4x A76 @ 2.4GHz + 4x A55 @ 1.8GHz</td></tr>
+            <tr><td>GPU</td><td>VideoCore VII (Vulkan 1.2)</td><td>Mali-G610 MP4 (Vulkan 1.1)</td></tr>
+            <tr><td>Max RAM</td><td>16GB LPDDR4X</td><td class="highlight-cell">32GB LPDDR4/LPDDR5</td></tr>
+            <tr><td>AI</td><td>None built-in (AI HAT+ extra)</td><td class="highlight-cell">6 TOPS NPU + M.2 = 26 TOPS</td></tr>
+            <tr><td>HDMI</td><td>2x micro HDMI 2.0 (4K@60)</td><td class="highlight-cell">2x full HDMI 2.1 (4K@120)</td></tr>
+            <tr><td>USB</td><td>2x USB 3.0, 2x USB 2.0</td><td class="highlight-cell">2x USB 3.2, 2x USB 2.0, 1x USB-C</td></tr>
+            <tr><td>PCIe</td><td>PCIe 2.0 x1 via M.2 HAT</td><td class="highlight-cell">PCIe 3.0 x4 onboard M.2</td></tr>
+            <tr><td>Wi-Fi</td><td>Wi-Fi 5</td><td class="highlight-cell">Wi-Fi 6</td></tr>
+            <tr><td>Supercapacitor</td><td>No</td><td class="highlight-cell">Yes</td></tr>
+            <tr><td>Pricing model</td><td>Undisclosed margin</td><td class="highlight-cell">Transparent 1.5x cost-plus</td></tr>
+            <tr><td>Price (4GB)</td><td>&pound;75</td><td>&pound;100</td></tr>
+            <tr><td>Price (8GB)</td><td>&pound;109.50</td><td>&pound;130</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; <script>document.write(new Date().getFullYear())</script> sintaxsaint &mdash;
+    <a href="https://github.com/sintaxsaint" target="_blank" rel="noopener">github.com/sintaxsaint</a>
+  </footer>
+
+  <script>
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).style.display = 'block';
+      btn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
