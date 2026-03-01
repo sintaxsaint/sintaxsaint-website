@@ -681,6 +681,10 @@ main {
 /* DOC HEADER */
 .doc-header {
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .doc-version {
@@ -688,6 +692,29 @@ main {
   font-weight: 600;
   color: var(--muted);
   letter-spacing: 0.05em;
+}
+
+.doc-downloads {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.doc-dl-btn {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.15s, color 0.15s;
+}
+
+.doc-dl-btn:hover {
+  background: var(--accent);
+  color: #fff;
 }
 
 /* FOOTER */

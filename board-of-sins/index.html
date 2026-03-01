@@ -36,7 +36,7 @@
         <div class="card">
           <div class="card-icon">&#128736;</div>
           <h3>Rockchip RK3588</h3>
-          <p>8-core big.LITTLE CPU (4x A76 + 4x A55), Mali-G610 GPU, 8nm TSMC process. Built-in 6 TOPS NPU, expandable to 26 TOPS via M.2 AI accelerator.</p>
+          <p>8-core big.LITTLE CPU (4x A76 + 4x A55), Mali-G610 GPU, 8nm TSMC process. Built-in 6 TOPS NPU plus a dedicated onboard AI accelerator chip &mdash; 26 TOPS total, always included with no M.2 trade-off.</p>
         </div>
         <div class="card">
           <div class="card-icon">&#129504;</div>
@@ -56,7 +56,7 @@
         <div class="card">
           <div class="card-icon">&#9889;</div>
           <h3>PCIe 3.0 x4</h3>
-          <p>Onboard M.2 M-Key slot with PCIe 3.0 x4 — for NVMe SSDs or AI accelerator cards. No extra HAT required, unlike the Pi 5.</p>
+          <p>Onboard M.2 M-Key slot with PCIe 3.0 x4, dedicated to NVMe SSD storage. AI acceleration runs on a separate dedicated PCIe lane &mdash; no storage vs AI trade-off.</p>
         </div>
         <div class="card">
           <div class="card-icon">&#128286;</div>
@@ -97,7 +97,11 @@
     <div id="tab-docs" class="tab-content" style="display:none">
 
       <div class="doc-header">
-        <span class="doc-version">v0.1 Draft &mdash; Board of Sins Technical Specification</span>
+        <span class="doc-version">v0.2 Draft &mdash; Board of Sins Technical Specification</span>
+        <div class="doc-downloads">
+          <a class="doc-dl-btn" href="Board_of_Sins_Spec_v0_2.docx" download>&#8659; Spec v0.2</a>
+          <a class="doc-dl-btn" href="Board_of_Sins_Spec_v0.1.docx" download>&#8659; Spec v0.1</a>
+        </div>
       </div>
 
       <div class="section-label">Plan of Action</div>
@@ -106,12 +110,13 @@
         <div class="roadmap-phase">
           <div class="phase-marker active">1</div>
           <div class="phase-body">
-            <h3>Phase 1 &mdash; PCB Design &amp; Prototype</h3>
+            <h3>Phase 1 &mdash; Parts Selection &amp; Specification</h3>
             <ul class="phase-items">
-              <li>Design schematic in EasyEDA based on RK3588 reference design</li>
-              <li>Route PCB &mdash; LPDDR4, USB high-speed, and HDMI differential pairs</li>
-              <li>Validate against Rockchip design guidelines</li>
-              <li>Send for prototype fabrication</li>
+              <li>Lock all component selections &mdash; SoC confirmed (RK3588), ports confirmed, RAM selection in progress</li>
+              <li>Finalise PMIC (RK806 likely), Wi-Fi module, thermal solution</li>
+              <li>Resolve GPIO level shifting requirements &mdash; reference Rock 5B schematic</li>
+              <li>Finalise AI accelerator chip deal (Hailo-8 or equivalent) or confirm early adopter M.2 expansion card plan</li>
+              <li>All specification and parts decisions documented publicly</li>
             </ul>
           </div>
         </div>
@@ -119,11 +124,25 @@
         <div class="roadmap-phase">
           <div class="phase-marker">2</div>
           <div class="phase-body">
-            <h3>Phase 2 &mdash; Production &amp; Public Launch</h3>
+            <h3>Phase 2 &mdash; PCB Design &amp; Prototype</h3>
+            <ul class="phase-items">
+              <li>Design schematic in EasyEDA based on RK3588 reference design</li>
+              <li>Route PCB &mdash; LPDDR4, USB high-speed, HDMI differential pairs, GPIO level shifting</li>
+              <li>Validate against Rockchip design guidelines</li>
+              <li>Send for prototype fabrication &mdash; black PCB</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="roadmap-phase">
+          <div class="phase-marker">3</div>
+          <div class="phase-body">
+            <h3>Phase 3 &mdash; Production &amp; Public Launch</h3>
             <ul class="phase-items">
               <li>Professional PCB assembly &mdash; not hand-soldered</li>
               <li>Volume component purchasing to drive down BOM cost</li>
-              <li>Public launch at ~&pound;100 retail</li>
+              <li>Public launch at &pound;100 retail</li>
+              <li>Ship AI accelerator expansion cards to early adopters once supply deal finalised</li>
               <li>Scale volume to reduce price toward and below Raspberry Pi pricing</li>
             </ul>
           </div>
@@ -149,8 +168,8 @@
         </li>
         <li class="sin-item" style="border-left-color:var(--gold)">
           <div class="sin-content">
-            <h3>AI accelerator card</h3>
-            <p>M.2 card selection TBD &mdash; Hailo-8 or equivalent targeting ~20 TOPS.</p>
+            <h3>AI accelerator chip</h3>
+            <p>Targeting Hailo-8 silicon or equivalent (~20 TOPS) on dedicated PCIe lane. Early models use second M.2 slot; upgrade card shipped to early adopters when deal closes.</p>
             <span class="severity severity-venial">Pending</span>
           </div>
         </li>
@@ -170,9 +189,30 @@
         </li>
         <li class="sin-item" style="border-left-color:var(--gold)">
           <div class="sin-content">
+            <h3>GPIO level shifting</h3>
+            <p>Confirm 3.3V across all 40 pins &mdash; reference Rock 5B schematic for RK3588 HAT compatibility solution.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>Supercapacitor sizing</h3>
+            <p>Calculate required capacitance based on worst-case shutdown power draw and time during schematic phase.</p>
+            <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
             <h3>OS distribution</h3>
             <p>Custom Debian/Ubuntu image planned for pre-install on included MicroSD.</p>
             <span class="severity severity-venial">Pending</span>
+          </div>
+        </li>
+        <li class="sin-item" style="border-left-color:var(--gold)">
+          <div class="sin-content">
+            <h3>CIO / Foundation</h3>
+            <p>Charitable Incorporated Organisation being established to fund development.</p>
+            <span class="severity severity-venial">In progress</span>
           </div>
         </li>
       </ul>
@@ -199,15 +239,23 @@
             <tr><th>Feature</th><th>Pi 5 (8GB)</th><th>Board of Sins (4GB Base)</th></tr>
           </thead>
           <tbody>
-            <tr><td>CPU</td><td>4x A76 @ 2.4GHz</td><td>4x A76 @ 2.4GHz + 4x A55 @ 1.8GHz</td></tr>
+            <tr><td>SoC</td><td>Broadcom BCM2712</td><td class="highlight-cell">Rockchip RK3588</td></tr>
+            <tr><td>CPU</td><td>4x A76 @ 2.4GHz</td><td class="highlight-cell">4x A76 @ 2.4GHz + 4x A55 @ 1.8GHz</td></tr>
             <tr><td>GPU</td><td>VideoCore VII (Vulkan 1.2)</td><td>Mali-G610 MP4 (Vulkan 1.1)</td></tr>
             <tr><td>Max RAM</td><td>16GB LPDDR4X</td><td class="highlight-cell">32GB LPDDR4/LPDDR5</td></tr>
-            <tr><td>AI</td><td>None built-in (AI HAT+ extra)</td><td class="highlight-cell">6 TOPS NPU + M.2 = 26 TOPS</td></tr>
+            <tr><td>AI</td><td>None built-in (AI HAT+ sold separately)</td><td class="highlight-cell">6 TOPS NPU + onboard AI chip = 26 TOPS &mdash; always included</td></tr>
             <tr><td>HDMI</td><td>2x micro HDMI 2.0 (4K@60)</td><td class="highlight-cell">2x full HDMI 2.1 (4K@120)</td></tr>
             <tr><td>USB</td><td>2x USB 3.0, 2x USB 2.0</td><td class="highlight-cell">2x USB 3.2, 2x USB 2.0, 1x USB-C</td></tr>
             <tr><td>PCIe</td><td>PCIe 2.0 x1 via M.2 HAT</td><td class="highlight-cell">PCIe 3.0 x4 onboard M.2</td></tr>
             <tr><td>Wi-Fi</td><td>Wi-Fi 5</td><td class="highlight-cell">Wi-Fi 6</td></tr>
-            <tr><td>Supercapacitor</td><td>No</td><td class="highlight-cell">Yes</td></tr>
+            <tr><td>Bluetooth</td><td>Bluetooth 5.0</td><td>Bluetooth 5.0</td></tr>
+            <tr><td>Ethernet</td><td>Gigabit (PoE+ via HAT)</td><td>Gigabit (PoE via HAT)</td></tr>
+            <tr><td>RTC</td><td>Yes (external battery)</td><td>Yes (external battery)</td></tr>
+            <tr><td>Supercapacitor</td><td>No</td><td class="highlight-cell">Yes &mdash; graceful shutdown on power loss</td></tr>
+            <tr><td>Debug LEDs</td><td>Basic activity LED</td><td class="highlight-cell">Full debug LED array</td></tr>
+            <tr><td>HAT compatible</td><td>Yes (40-pin)</td><td class="highlight-cell">Yes (40-pin, hardware-level Pi-compatible)</td></tr>
+            <tr><td>NVMe storage</td><td>Via M.2 HAT (extra cost)</td><td class="highlight-cell">Onboard dedicated M.2 slot</td></tr>
+            <tr><td>PCB colour</td><td>Green</td><td class="highlight-cell">Black</td></tr>
             <tr><td>Pricing model</td><td>Undisclosed margin</td><td class="highlight-cell">Transparent 1.5x cost-plus</td></tr>
             <tr><td>Price (4GB)</td><td>&pound;75</td><td>&pound;100</td></tr>
             <tr><td>Price (8GB)</td><td>&pound;109.50</td><td>&pound;130</td></tr>
