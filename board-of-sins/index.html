@@ -36,7 +36,7 @@
         <div class="card">
           <div class="card-icon">&#128736;</div>
           <h3>Rockchip RK3588</h3>
-          <p>8-core big.LITTLE CPU (4x A76 + 4x A55), Mali-G610 GPU, 8nm TSMC process. Built-in 6 TOPS NPU plus a dedicated onboard AI accelerator chip &mdash; 26 TOPS total, always included with no M.2 trade-off.</p>
+          <p>8-core big.LITTLE CPU (4x A76 + 4x A55), Mali-G610 GPU, 8nm TSMC process. Built-in 6 TOPS NPU on every model. M.2 slot available for AI accelerator expansion &mdash; early adopters receive a free Hailo-8 card shipped to them when the supply deal closes.</p>
         </div>
         <div class="card">
           <div class="card-icon">&#129504;</div>
@@ -97,8 +97,9 @@
     <div id="tab-docs" class="tab-content" style="display:none">
 
       <div class="doc-header">
-        <span class="doc-version">v0.2 Draft &mdash; Board of Sins Technical Specification</span>
+        <span class="doc-version">v0.3 Draft &mdash; Board of Sins Technical Specification</span>
         <div class="doc-downloads">
+          <a class="doc-dl-btn" href="Board_of_Sins_Spec_v0_3.docx" download>&#8659; Spec v0.3</a>
           <a class="doc-dl-btn" href="Board_of_Sins_Spec_v0_2.docx" download>&#8659; Spec v0.2</a>
           <a class="doc-dl-btn" href="Board_of_Sins_Spec_v0.1.docx" download>&#8659; Spec v0.1</a>
         </div>
@@ -152,11 +153,11 @@
 
       <div class="section-label" style="margin-top:2.5rem">Open items</div>
       <ul class="sin-list">
-        <li class="sin-item" style="border-left-color:var(--gold)">
+        <li class="sin-item" style="border-left-color:var(--red)">
           <div class="sin-content">
-            <h3>RAM part number</h3>
-            <p>Final validated LPDDR4 chip TBD &mdash; need high-density package under &pound;10 at volume.</p>
-            <span class="severity severity-venial">Pending</span>
+            <h3>RAM sourcing</h3>
+            <p>LPDDR4 at required densities is unavailable through open distribution (LCSC, Mouser, Digikey). Requires direct manufacturer outreach or a Shenzhen CM with existing supply relationships. Priority action for Phase 1.</p>
+            <span class="severity severity-mortal">Blocked</span>
           </div>
         </li>
         <li class="sin-item" style="border-left-color:var(--gold)">
@@ -243,7 +244,7 @@
             <tr><td>CPU</td><td>4x A76 @ 2.4GHz</td><td class="highlight-cell">4x A76 @ 2.4GHz + 4x A55 @ 1.8GHz</td></tr>
             <tr><td>GPU</td><td>VideoCore VII (Vulkan 1.2)</td><td>Mali-G610 MP4 (Vulkan 1.1)</td></tr>
             <tr><td>Max RAM</td><td>16GB LPDDR4X</td><td class="highlight-cell">32GB LPDDR4/LPDDR5</td></tr>
-            <tr><td>AI</td><td>None built-in (AI HAT+ sold separately)</td><td class="highlight-cell">6 TOPS NPU + onboard AI chip = 26 TOPS &mdash; always included</td></tr>
+            <tr><td>AI</td><td>None built-in (AI HAT+ sold separately)</td><td class="highlight-cell">6 TOPS NPU built-in + M.2 slot for expansion. Early adopters get free Hailo-8 card (~20 TOPS) when supply deal closes.</td></tr>
             <tr><td>HDMI</td><td>2x micro HDMI 2.0 (4K@60)</td><td class="highlight-cell">2x full HDMI 2.1 (4K@120)</td></tr>
             <tr><td>USB</td><td>2x USB 3.0, 2x USB 2.0</td><td class="highlight-cell">2x USB 3.2, 2x USB 2.0, 1x USB-C</td></tr>
             <tr><td>PCIe</td><td>PCIe 2.0 x1 via M.2 HAT</td><td class="highlight-cell">PCIe 3.0 x4 onboard M.2</td></tr>

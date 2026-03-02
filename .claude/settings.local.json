@@ -9,7 +9,9 @@
       "Bash(python3 -c \"import docx; doc = docx.Document\\(r''c:/Users/eread/Documents/sintaxsaint-website/board-of-sins/Board_of_Sins_Spec_v0.1.docx''\\); [print\\(p.text\\) for p in doc.paragraphs]\")",
       "Bash(python -c \"import docx; doc = docx.Document\\(r''c:/Users/eread/Documents/sintaxsaint-website/board-of-sins/Board_of_Sins_Spec_v0.1.docx''\\); [print\\(p.text\\) for p in doc.paragraphs]\")",
       "Bash(pip install python-docx)",
-      "Bash(python -c \":*)"
+      "Bash(python -c \":*)",
+      "Bash(gh repo view sintaxsaint/addiction-predictor --json name,description,url,languages,defaultBranchRef,readme)",
+      "Bash(gh repo view sintaxsaint/addiction-predictor --json name,description,url,defaultBranchRef)"
     ]
   }
 }

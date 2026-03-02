@@ -1,0 +1,179 @@
+BOARD OF SINS
+Technical Specification Document
+v0.3 Draft  ·  Project Lead: sintaxsaint
+Everything the Pi does. And more.
+1. Project Overview
+The Board of Sins is an ambitious single-board computer (SBC) designed to outperform the Raspberry Pi 5 at a comparable price point, while maintaining full GPIO HAT compatibility and transparent ethical pricing. Built around the Rockchip RK3588 SoC, it targets makers, developers, and AI enthusiasts who need more power without paying premium prices.
+
+Core Philosophy
+•	More capable than the Raspberry Pi 5 in every measurable way
+•	Transparent cost-plus pricing at 1.5x markup — no hidden margins
+•	Full Raspberry Pi HAT compatibility via standard 40-pin GPIO header with hardware-level compatibility — no software workarounds required
+•	Ethical alternative to a foundation that abandoned its original mission
+•	Designed to scale — start at £100, drive price down as volume grows
+•	Black PCB across all models — clean, sleek aesthetic
+•	Part of the Restore project — returning computing to a golden age of openness with modern hardware
+
+2. System-on-Chip
+Rockchip RK3588
+The RK3588 is the highest-performance SBC-class SoC available for open board design. Its combination of high core count, wide memory bus, and built-in NPU makes it the only realistic choice for the Board of Sins specification.
+
+Specification	Detail
+Architecture	ARM big.LITTLE — 4x Cortex-A76 (up to 2.4GHz) + 4x Cortex-A55 (up to 1.8GHz)
+Process Node	8nm TSMC
+GPU	ARM Mali-G610 MP4 — OpenGL ES 3.2, Vulkan 1.1, OpenCL 2.0
+Built-in NPU	6 TOPS (INT4/INT8/INT16/FP16) — RKNN supported
+Memory Support	LPDDR4/LPDDR4X/LPDDR5 — up to 32GB
+Memory Bus	64-bit dual channel (4x 16-bit sub-channels)
+Video Decode	8K@60fps H.265/H.264/AV1/VP9
+Video Encode	8K@30fps H.265/H.264
+PCIe	PCIe 3.0 x4 + PCIe 2.0 x1
+Estimated Unit Cost	~£12–16 at low volume, lower at scale
+
+3. Memory
+RAM — Sourcing Status & Strategy
+LPDDR4 at the densities required for a cost-effective SBC does not flow through standard open distribution channels such as LCSC, Mouser, or Digikey. The AI data centre boom has consumed available supply, with memory manufacturers selling primarily through direct ODM relationships. This is a known structural constraint affecting all independent SBC developers, not a project-specific failure.
+
+The Board of Sins v0.3 adopts a pragmatic two-phase memory strategy:
+
+•	Phase 1 (Prototype): Source discrete LPDDR4 dies through direct manufacturer outreach or a Shenzhen-based contract manufacturer with existing supply relationships. Target: validated x32 dies on the Rockchip BSP DDR support list.
+•	Phase 2 (Production): Establish direct supply agreements at volume. Higher RAM tiers (8GB, 16GB, 32GB) will follow once the base model is proven and supplier relationships are in place.
+
+Specification	Detail
+Interface	64-bit dual channel LPDDR4/LPDDR4X (2x 32-bit channels)
+Bus Width	x32 per channel — two dies for full 64-bit bus
+Max Supported	32GB (RK3588 hardware limit)
+Target Speed	LPDDR4-3200 (1600MHz clock) minimum
+Package	BGA200 — matching Rock 5B reference layout
+Sourcing Route	Direct manufacturer outreach or CM procurement
+RAM BOM Target	£10 or under per 4GB at volume
+
+Model Lineup & Pricing
+Model	RAM	Retail Price	BOM Target
+Board of Sins Base	4GB LPDDR4	£100	~£67
+Board of Sins Mid	8GB LPDDR4	£130	~£87
+Board of Sins High	16GB LPDDR4	£175	~£117
+Board of Sins Ultra	32GB LPDDR4	£240	~£160
+
+All models include identical features. RAM is the only differentiator between tiers. Higher tiers will launch after the base model is established.
+
+4. AI Acceleration
+The Board of Sins targets on-device AI inference without cloud dependency. The primary AI capability is the RK3588’s built-in 6 TOPS NPU, which is present on every model from launch. Additional AI acceleration via M.2 is available to users who choose to add a compatible accelerator card.
+
+Hailo Supply Status
+Direct access to Hailo-8 silicon requires a verified company email address, making it inaccessible to the project at its current stage. Rather than delaying launch, the Board of Sins will ship with the M.2 slot available for user-supplied AI acceleration. When a supply agreement with Hailo or an equivalent vendor is finalised, all early adopters will be contacted and offered a free AI accelerator expansion card shipped to their door. Boards sold after the deal closes will include the card as standard.
+
+Specification	Detail
+Built-in NPU	6 TOPS — RK3588 integrated, present on every model from launch
+M.2 AI Slot	M.2 M-Key slot available for user-supplied AI accelerator cards
+Target Accelerator	Hailo-8 or equivalent (~20 TOPS) — supply agreement pending
+Combined Target	26 TOPS when accelerator installed
+Early Adopter Plan	Free AI accelerator card shipped to early buyers when supply deal closes
+Frameworks	TensorFlow, PyTorch, ONNX, TFLite via RKNN SDK
+User Benefit	On-device inference without cloud dependency
+
+5. Connectivity
+Display
+Specification	Detail
+HDMI	2x full-size HDMI 2.1 — up to 4K@120fps per port with HDR
+Camera	MIPI CSI port — compatible with standard camera modules
+
+USB
+Specification	Detail
+USB 3.2 Type-A	2x USB 3.2 Gen1 Type-A (5Gbps)
+USB 2.0 Type-A	2x USB 2.0 Type-A for legacy peripherals
+USB-C	1x USB-C — data + power output
+USB-C PD Input	1x USB-C Power Delivery input — board power supply
+
+Wireless & Networking
+Specification	Detail
+Wi-Fi	Wi-Fi 6 (802.11ax) — 2.4GHz + 5GHz dual band
+Bluetooth	Bluetooth 5.0 + BLE
+Ethernet	Gigabit Ethernet (1000BASE-T) with PoE support via HAT
+Wi-Fi Modes	Station + Access Point (AP) mode supported simultaneously
+
+Expansion
+Specification	Detail
+GPIO Header	40-pin GPIO — Raspberry Pi HAT compatible pinout and voltage levels. Hardware-level compatibility, no software layer required. Level shifting applied to ensure 3.3V across all pins. Reference: Rock 5B RK3588 schematic.
+M.2 Slot (Primary)	M.2 M-Key — NVMe SSD (dedicated, always available for storage)
+M.2 Slot (Secondary)	M.2 M-Key — AI accelerator expansion card (user supplied or early adopter card when deal closes)
+Storage	MicroSD card slot — user supplied, no onboard eMMC
+
+6. Power System
+Specification	Detail
+Primary Input	USB-C Power Delivery (PD) — 20V/3A (60W) recommended
+PMIC	TBD during PCB design phase — RK806 or equivalent
+Supercapacitor Backup	Onboard supercapacitor for graceful shutdown on power loss
+Backup Function	Maintains power long enough to safely close files and shut down OS. Capacitor sizing to be calculated based on worst-case shutdown power draw during schematic phase.
+GPIO Power	3.3V on GPIO header — Raspberry Pi HAT compatible
+
+7. Additional Features
+Specification	Detail
+PCB Colour	Black — all models. Consistent with Board of Sins branding.
+Debug LEDs	Multiple debug LEDs — power, activity, and user-programmable status indicators
+RTC	Real-time clock with external battery backup
+Pre-installed OS	OS pre-flashed on MicroSD card included in retail packaging
+Form Factor	TBD — targeting credit-card to slightly larger footprint
+Operating Temp	0°C to 70°C (commercial grade)
+
+8. Competitive Comparison
+All Raspberry Pi 5 specifications sourced from official Raspberry Pi documentation (raspberrypi.com).
+
+Feature	Raspberry Pi 5 (8GB)	Board of Sins (4GB Base)
+SoC	Broadcom BCM2712	Rockchip RK3588
+CPU	4x Cortex-A76 @ 2.4GHz	4x Cortex-A76 @ 2.4GHz + 4x Cortex-A55 @ 1.8GHz
+GPU	VideoCore VII (OpenGL ES 3.1, Vulkan 1.2)	Mali-G610 MP4 (OpenGL ES 3.2, Vulkan 1.1)
+Max RAM	16GB LPDDR4X-4267	32GB LPDDR4/LPDDR5
+AI Performance	None built-in (AI HAT+ sold separately)	6 TOPS NPU built-in + M.2 slot for expansion
+HDMI	2x micro HDMI 2.0 (4Kp60)	2x full-size HDMI 2.1 (4K@120fps)
+USB	2x USB 3.0, 2x USB 2.0	2x USB 3.2, 2x USB 2.0, 1x USB-C
+PCIe	PCIe 2.0 x1 (via M.2 HAT)	PCIe 3.0 x4 + PCIe 2.0 x1 (onboard M.2)
+Wi-Fi	Wi-Fi 5 (802.11ac)	Wi-Fi 6 (802.11ax)
+Bluetooth	Bluetooth 5.0	Bluetooth 5.0
+Ethernet	Gigabit (PoE+ via HAT)	Gigabit (PoE via HAT)
+RTC	Yes (external battery)	Yes (external battery)
+Supercapacitor	No	Yes — graceful shutdown on power loss
+HAT Compatible	Yes (40-pin)	Yes (40-pin, hardware-level Pi-compatible)
+NVMe Storage	Via M.2 HAT (extra cost)	Onboard dedicated M.2 slot
+PCB Colour	Green	Black
+Retail Price (4GB)	£75	£100
+Retail Price (8GB)	£109.50	£130
+Pricing Model	Undisclosed margin	Transparent 1.5x cost-plus markup
+
+9. Development Roadmap
+Phase 1 — Parts Selection & Specification
+•	SoC confirmed: RK3588. Ports confirmed. RAM sourcing strategy defined (direct manufacturer outreach required).
+•	Finalise PMIC (RK806 likely), Wi-Fi module, thermal solution
+•	Resolve GPIO level shifting requirements — reference Rock 5B schematic
+•	Begin outreach to Hailo and equivalent AI chip vendors
+•	All specification and parts decisions documented publicly under the Restore project
+
+Phase 2 — PCB Design & Prototype
+•	Design schematic in EasyEDA based on RK3588 reference design
+•	Route PCB — LPDDR4, USB high-speed, HDMI differential pairs, GPIO level shifting
+•	Validate against Rockchip design guidelines
+•	Send for prototype fabrication — black PCB
+
+Phase 3 — Production & Public Launch
+•	Professional PCB assembly — not hand-soldered
+•	Volume component purchasing to drive down BOM cost
+•	Public launch at £100 retail
+•	Ship AI accelerator expansion cards to early adopters once supply deal finalised
+•	Scale volume to reduce price toward and below Raspberry Pi pricing
+
+10. Open Items & Decisions Pending
+Item	Status	Notes
+RAM Sourcing	Blocked	LPDDR4 unavailable through open distribution. Requires direct manufacturer outreach or CM with existing supply chain. Priority action for Phase 1.
+PMIC Selection	Likely RK806	Pending schematic phase — well-documented with RK3588.
+AI Accelerator	Pending	Hailo-8 access requires verified company email — not currently available to project. M.2 slot ships open; upgrade card sent to early adopters when deal closes.
+Wi-Fi Module	TBD	Must support AP + station mode simultaneously.
+GPIO Level Shifting	To be validated	Confirm 3.3V across all 40 pins. Reference Rock 5B schematic for RK3588 HAT compatibility solution.
+Supercapacitor Sizing	TBD	Calculate required capacitance based on worst-case shutdown power draw during schematic phase.
+Form Factor	TBD	PCB dimensions decided during layout phase.
+Thermal Solution	TBD	Active vs passive cooling — RK3588 runs warm under full load.
+OS Distribution	Planned	Custom Debian/Ubuntu image for pre-install on included MicroSD.
+CIO / Foundation	In progress	Charitable Incorporated Organisation to be established to fund development. Legal trustee required.
+
+
+Board of Sins — v0.3 Draft Specification
+sintaxsaint  ·  Board of Sins Project  ·  Part of the Restore Initiative
