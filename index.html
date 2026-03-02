@@ -13,6 +13,9 @@
     <a class="nav-link active" href="index.html">Home</a>
     <a class="nav-link" href="board-of-sins/index.html">Board of Sins</a>
     <a class="nav-link" href="pi-a-day/index.html">pi-a-day</a>
+    <div class="visitor-stats">
+      <span class="stat-num" id="stat-monthly">—</span> this month &nbsp;&middot;&nbsp; <span class="stat-num" id="stat-alltime">—</span> all time
+    </div>
   </nav>
 
   <main>
@@ -112,5 +115,14 @@
     <a href="https://github.com/sintaxsaint" target="_blank" rel="noopener">github.com/sintaxsaint</a>
   </footer>
 
+  <script>
+    fetch('/api/count')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('stat-monthly').textContent = d.monthly.toLocaleString();
+        document.getElementById('stat-alltime').textContent = d.allTime.toLocaleString();
+      })
+      .catch(() => {});
+  </script>
 </body>
 </html>
