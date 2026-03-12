@@ -717,7 +717,6 @@ main {
   color: #fff;
 }
 
-<<<<<<< Updated upstream
 /* VISITOR STATS */
 .visitor-stats {
   margin-left: auto;
@@ -732,7 +731,8 @@ main {
 .visitor-stats .stat-num {
   color: var(--accent);
   font-weight: 700;
-=======
+}
+
 /* AI.PLAY — extend root */
 :root {
   --aip: #10b981;
@@ -1241,7 +1241,6 @@ main {
 @keyframes shimmer {
   from { transform: translateX(-100%); }
   to   { transform: translateX(100%); }
->>>>>>> Stashed changes
 }
 
 /* FOOTER */
