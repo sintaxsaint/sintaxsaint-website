@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ai.play &mdash; sintaxsaint</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">sintax<span>saint</span></a>
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="../board-of-sins/index.html">Board of Sins</a>
+    <a class="nav-link" href="../pi-a-day/index.html">pi-a-day</a>
+    <a class="nav-link active" href="index.html">ai.play</a>
+  </nav>
+
+  <main>
+
+    <!-- HEADER -->
+    <section class="aip-header">
+      <div class="aip-tag">&#129302; programming language</div>
+      <h1><span class="aip-accent">ai</span>.play</h1>
+      <div class="aip-meta">
+        <span class="version-badge">v0.5</span>
+        <span class="status-badge status-active">&#9679; active</span>
+        <span class="lang-badge">Python reference impl</span>
+      </div>
+      <p>
+        A programming language for building AI systems. Write <code>.aip</code> files —
+        model selection, web search, vision, voice, and memory in one place.
+        No build steps, no config. Just run.
+      </p>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="https://github.com/sintaxsaint/ai.play" target="_blank" rel="noopener">
+          &#128279; GitHub
+        </a>
+        <a class="btn btn-outline" href="https://github.com/sintaxsaint/ai.play/releases" target="_blank" rel="noopener">
+          &#11015;&#65039; Download
+        </a>
+      </div>
+    </section>
+
+    <!-- TAB BAR -->
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabBtn-overview" onclick="switchTab('overview')">Overview</button>
+      <button class="tab-btn" id="tabBtn-store" onclick="switchTab('store')">&#129722; Module Store</button>
+    </div>
+
+    <!-- ====== OVERVIEW TAB ====== -->
+    <div id="tab-overview">
+
+      <div class="section-label" style="margin-top:2.5rem">Capabilities</div>
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-icon">&#129302;</div>
+          <h3>Model Selection</h3>
+          <p>Choose from <em>factual</em>, <em>fun</em>, <em>thinking</em>, or <em>custom</em> modes. Tune the personality to your use case in a single line.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128269;</div>
+          <h3>Web Search</h3>
+          <p>Built-in DuckDuckGo integration. Your AI can search the web in real-time without any extra wiring or API keys.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128065;&#65039;</div>
+          <h3>Vision Input</h3>
+          <p>Single image or live webcam feed. Pass visual context to your model with no external API boilerplate.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128444;&#65039;</div>
+          <h3>Image &amp; Video Generation</h3>
+          <p>Generate images and text-to-video output from within your <code>.aip</code> file. First-class output, not an afterthought.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#127908;</div>
+          <h3>Voice I/O</h3>
+          <p>Speech input and output for phone-call style interactions. Deploy conversational AI without complex pipelines.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128196;</div>
+          <h3>Data Training</h3>
+          <p>Feed native pairs, JSON, CSV, PDF, DOCX, or plain text. The pipeline handles tokenisation, TF-IDF embedding, and semantic retrieval.</p>
+        </div>
+
+      </div>
+
+      <div class="section-label" style="margin-top:2.5rem">Memory Architectures</div>
+      <div class="memory-grid">
+
+        <div class="memory-card">
+          <div class="memory-icon">&#128302;</div>
+          <h3>Rule-Based</h3>
+          <p>Pattern matching against defined rules. Predictable, fast, and deterministic — best for structured domains.</p>
+          <span class="memory-tag">pattern matching</span>
+        </div>
+
+        <div class="memory-card">
+          <div class="memory-icon">&#129504;</div>
+          <h3>Generative</h3>
+          <p>Concept extraction and generative memory. The system learns and adapts from interactions over time.</p>
+          <span class="memory-tag">concept extraction</span>
+        </div>
+
+        <div class="memory-card">
+          <div class="memory-icon">&#128190;</div>
+          <h3>Persistent</h3>
+          <p>User memory that survives sessions. Sync across ten machines on a network mount — the memory follows the user.</p>
+          <span class="memory-tag">cross-machine sync</span>
+        </div>
+
+      </div>
+
+      <div class="section-label" style="margin-top:2.5rem">Deployment</div>
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-icon">&#128187;</div>
+          <h3>Local Dev</h3>
+          <p>Built-in test UI. Run your <code>.aip</code> file locally and iterate fast — no server setup needed.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#127760;</div>
+          <h3>HTTP Server</h3>
+          <p><code>out.in()</code> launches an HTTP server with user persistence and optional remote memory synchronisation.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128279;</div>
+          <h3>Windows Installer</h3>
+          <p>Graphical installer registers <code>.aip</code> file associations system-wide. One install, ready to go.</p>
+        </div>
+
+      </div>
+
+      <div class="section-label" style="margin-top:2.5rem">Quick Start</div>
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-label">example.aip</span>
+          <button class="code-copy" onclick="copyCode(this)">copy</button>
+        </div>
+        <pre><code><span class="c-cmt"># choose your model mode</span>
+<span class="c-kw">model</span>  factual
+
+<span class="c-cmt"># enable capabilities</span>
+<span class="c-kw">search</span> enabled
+<span class="c-kw">vision</span> disabled
+
+<span class="c-cmt"># set memory architecture</span>
+<span class="c-kw">memory</span> persistent
+
+<span class="c-cmt"># define a system personality</span>
+<span class="c-kw">system</span> <span class="c-str">"You are a helpful coding assistant. You remember your users."</span>
+
+<span class="c-cmt"># train on custom data</span>
+<span class="c-kw">train</span>  <span class="c-str">"docs/knowledge.json"</span>
+
+<span class="c-cmt"># load a module from the registry</span>
+<span class="c-kw">module</span> <span class="c-str">"code-assist"</span>
+
+<span class="c-cmt"># launch the HTTP server</span>
+<span class="c-kw">out.in</span>()</code></pre>
+      </div>
+
+      <div style="text-align:center; margin-top:2rem; padding-bottom:1rem">
+        <a class="btn btn-primary" href="https://github.com/sintaxsaint/ai.play" target="_blank" rel="noopener">
+          View full docs on GitHub &rarr;
+        </a>
+      </div>
+
+    </div>
+    <!-- /OVERVIEW TAB -->
+
+    <!-- ====== MODULE STORE TAB ====== -->
+    <div id="tab-store" hidden>
+
+      <div id="store-notice" class="store-notice" hidden></div>
+
+      <div class="store-toolbar">
+        <input
+          type="text"
+          id="store-search"
+          class="store-search"
+          placeholder="Search modules by name, description, or author..."
+          oninput="filterModules()"
+        >
+        <div class="tag-filter" id="tag-filter">
+          <button class="tag-filter-btn active" onclick="filterByTag(this,'')">All</button>
+          <button class="tag-filter-btn" onclick="filterByTag(this,'nlp')">nlp</button>
+          <button class="tag-filter-btn" onclick="filterByTag(this,'coding')">coding</button>
+          <button class="tag-filter-btn" onclick="filterByTag(this,'knowledge')">knowledge</button>
+          <button class="tag-filter-btn" onclick="filterByTag(this,'education')">education</button>
+          <button class="tag-filter-btn" onclick="filterByTag(this,'analysis')">analysis</button>
+          <button class="tag-filter-btn" onclick="filterByTag(this,'language')">language</button>
+        </div>
+      </div>
+
+      <div id="module-grid" class="module-grid" style="margin-top:1.5rem">
+        <!-- Loading skeletons -->
+        <div class="module-skeleton"></div>
+        <div class="module-skeleton"></div>
+        <div class="module-skeleton"></div>
+      </div>
+
+      <!-- SUBMIT A MODULE -->
+      <div class="section-label" style="margin-top:3rem">Submit a Module</div>
+      <div class="submit-panel">
+        <p style="color:var(--muted); font-size:0.875rem; margin-bottom:1.5rem; line-height:1.6">
+          Share your <code>.aimod</code> file with the ai.play community.
+          Host the file anywhere (GitHub raw, CDN, etc.) and paste the URL below.
+          Submissions are reviewed before going live.
+        </p>
+        <form id="submit-form" onsubmit="submitModule(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Module Name</label>
+              <input type="text" class="form-input" id="sub-name" placeholder="my-cool-module" required pattern="[a-zA-Z0-9\-]+" title="Lowercase letters, numbers, and hyphens only">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Version</label>
+              <input type="text" class="form-input" id="sub-version" placeholder="1.0.0" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-input" id="sub-desc" placeholder="What does your module do?" required maxlength="200">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Author</label>
+              <input type="text" class="form-input" id="sub-author" placeholder="your username" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tags <span style="font-weight:400">(comma-separated)</span></label>
+              <input type="text" class="form-input" id="sub-tags" placeholder="nlp, knowledge">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Module File URL <span style="font-weight:400">(.aimod hosted on GitHub, etc.)</span></label>
+            <input type="url" class="form-input" id="sub-url" placeholder="https://raw.githubusercontent.com/you/repo/main/module.aimod">
+          </div>
+          <div class="form-group">
+            <label class="form-label">README / Notes <span style="font-weight:400">(optional)</span></label>
+            <textarea class="form-input form-textarea" id="sub-readme" placeholder="How to use this module, requirements, example usage..."></textarea>
+          </div>
+          <div id="submit-msg" class="submit-msg" hidden></div>
+          <button type="submit" class="btn btn-primary" id="submit-btn">Submit for Review &rarr;</button>
+        </form>
+      </div>
+
+    </div>
+    <!-- /MODULE STORE TAB -->
+
+  </main>
+
+  <footer>
+    &copy; <script>document.write(new Date().getFullYear())</script> sintaxsaint &mdash;
+    <a href="https://github.com/sintaxsaint" target="_blank" rel="noopener">github.com/sintaxsaint</a>
+  </footer>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ==========================================================
+    // SUPABASE CONFIG — paste your project URL and anon key here
+    // ==========================================================
+    const SUPABASE_URL  = 'https://hxnfurjlfyuwdnsytewp.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4bmZ1cmpsZnl1d2Ruc3l0ZXdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMzM0MTQsImV4cCI6MjA4ODkwOTQxNH0.pDX-dqiwFf7-TgjOyHx_8fYBhBVL5hxkDY6ElMUNloo';
+    // ==========================================================
+
+    const configured = !SUPABASE_URL.startsWith('YOUR_');
+    let db = null;
+
+    if (configured) {
+      const { createClient } = supabase;
+      db = createClient(SUPABASE_URL, SUPABASE_ANON);
+    }
+
+    // ---- Demo / fallback data ----
+    const DEMO = [
+      { id:'d1', name:'medical-kb',    slug:'medical-kb',    description:'Medical Q&A knowledge base for clinical pattern matching and symptom analysis.',              author:'sintaxsaint', version:'1.2.0', tags:['healthcare','knowledge'], downloads:47,  file_url:null },
+      { id:'d2', name:'code-assist',   slug:'code-assist',   description:'Code review and completion training patterns for Python, JavaScript, and C++.',              author:'devtools_lab', version:'2.0.1', tags:['coding','developer'],    downloads:128, file_url:null },
+      { id:'d3', name:'multilang',     slug:'multilang',     description:'Multi-language response support covering ES, FR, DE, JP, and ZH locales.',                  author:'globalbot',   version:'1.0.0', tags:['language','i18n'],        downloads:23,  file_url:null },
+      { id:'d4', name:'math-tutor',    slug:'math-tutor',    description:'Step-by-step mathematics tutoring with worked examples across all levels.',                  author:'sintaxsaint', version:'1.1.0', tags:['education','maths'],      downloads:61,  file_url:null },
+      { id:'d5', name:'sentiment-pro', slug:'sentiment-pro', description:'Advanced sentiment and emotion classification patterns for consumer text analysis.',          author:'nlpforge',    version:'3.0.0', tags:['nlp','analysis'],         downloads:89,  file_url:null },
+      { id:'d6', name:'legal-kb',      slug:'legal-kb',      description:'Legal Q&A patterns for contract review and compliance query handling.',                      author:'legalbot',    version:'0.9.0', tags:['legal','knowledge'],      downloads:15,  file_url:null },
+    ];
+
+    let allModules = [];
+    let activeTag  = '';
+    let storeLoaded = false;
+
+    // ---- Tab switching ----
+    function switchTab(name) {
+      ['overview', 'store'].forEach(t => {
+        document.getElementById('tab-' + t).hidden = (t !== name);
+        document.getElementById('tabBtn-' + t).classList.toggle('active', t === name);
+      });
+      if (name === 'store' && !storeLoaded) {
+        storeLoaded = true;
+        loadModules();
+      }
+    }
+
+    // ---- Load modules from Supabase (or fall back to demo) ----
+    async function loadModules() {
+      if (configured && db) {
+        const { data, error } = await db
+          .from('modules')
+          .select('*')
+          .eq('approved', true)
+          .order('downloads', { ascending: false });
+
+        if (error) {
+          showNotice('warning', '&#9888;&#65039; Could not reach the module store. Showing demo data.');
+          allModules = DEMO;
+        } else if (!data || data.length === 0) {
+          showNotice('info', '&#10024; No modules yet — be the first to submit one below!');
+          allModules = [];
+        } else {
+          allModules = data;
+        }
+      } else {
+        showNotice('demo', '&#128204; Demo mode — Supabase not configured yet. Showing example modules.');
+        allModules = DEMO;
+      }
+      renderModules(allModules);
+    }
+
+    function showNotice(type, msg) {
+      const el = document.getElementById('store-notice');
+      el.innerHTML = msg;
+      el.className = 'store-notice store-notice-' + type;
+      el.hidden = false;
+    }
+
+    function renderModules(list) {
+      const grid = document.getElementById('module-grid');
+      if (!list || list.length === 0) {
+        grid.innerHTML = '<p class="store-empty">No modules match your search.</p>';
+        return;
+      }
+      grid.innerHTML = list.map(m => `
+        <div class="module-card" data-id="${m.id}" data-tags="${(m.tags || []).join(',')}">
+          <div class="module-card-top">
+            <div>
+              <h3 class="module-name">${escHtml(m.name)}</h3>
+              <span class="module-author">by ${escHtml(m.author)}</span>
+            </div>
+            <span class="version-chip">v${escHtml(m.version)}</span>
+          </div>
+          <p class="module-desc">${escHtml(m.description)}</p>
+          <div class="module-tags">
+            ${(m.tags || []).map(t => `<span class="tag-chip">${escHtml(t)}</span>`).join('')}
+          </div>
+          <div class="module-footer">
+            <span class="module-downloads">&#11015;&#65039; ${Number(m.downloads).toLocaleString()}</span>
+            ${m.file_url
+              ? `<a class="btn btn-outline module-dl-btn" href="${escHtml(m.file_url)}" target="_blank" rel="noopener" onclick="bumpDownload('${escHtml(m.slug)}')">Download</a>`
+              : `<span class="module-no-url">URL pending</span>`
+            }
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterModules() {
+      const q = document.getElementById('store-search').value.toLowerCase();
+      const filtered = allModules.filter(m => {
+        const text = (m.name + ' ' + m.description + ' ' + m.author).toLowerCase();
+        const matchText = text.includes(q);
+        const matchTag  = !activeTag || (m.tags || []).includes(activeTag);
+        return matchText && matchTag;
+      });
+      renderModules(filtered);
+    }
+
+    function filterByTag(btn, tag) {
+      activeTag = tag;
+      document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterModules();
+    }
+
+    async function bumpDownload(slug) {
+      if (!db) return;
+      await db.rpc('increment_downloads', { module_slug: slug });
+    }
+
+    // ---- Submit form ----
+    async function submitModule(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const msg = document.getElementById('submit-msg');
+
+      if (!configured || !db) {
+        msg.textContent = 'Module store is not yet configured — check back soon.';
+        msg.className = 'submit-msg submit-msg-error';
+        msg.hidden = false;
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      const name    = document.getElementById('sub-name').value.trim();
+      const slug    = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const rawTags = document.getElementById('sub-tags').value;
+      const tags    = rawTags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
+
+      const { error } = await db.from('modules').insert({
+        name,
+        slug,
+        description : document.getElementById('sub-desc').value.trim(),
+        author      : document.getElementById('sub-author').value.trim(),
+        version     : document.getElementById('sub-version').value.trim(),
+        tags,
+        file_url    : document.getElementById('sub-url').value.trim() || null,
+        readme      : document.getElementById('sub-readme').value.trim() || null,
+        approved    : false,
+        downloads   : 0,
+      });
+
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review →';
+
+      if (error) {
+        msg.textContent = 'Submission failed: ' + error.message;
+        msg.className = 'submit-msg submit-msg-error';
+      } else {
+        msg.innerHTML = '&#10003; Submitted! Your module will appear after review.';
+        msg.className = 'submit-msg submit-msg-ok';
+        e.target.reset();
+      }
+      msg.hidden = false;
+    }
+
+    // ---- Copy code block ----
+    function copyCode(btn) {
+      const raw = btn.closest('.code-block').querySelector('pre code').innerText;
+      navigator.clipboard.writeText(raw).then(() => {
+        btn.textContent = 'copied!';
+        setTimeout(() => { btn.textContent = 'copy'; }, 1600);
+      });
+    }
+
+    // ---- Utility ----
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+
+</body>
+</html>
