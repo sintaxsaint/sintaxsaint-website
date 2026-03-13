@@ -5,6 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ai.play &mdash; sintaxsaint</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .btn-report {
+      background: none;
+      border: 1px solid #3a3a4a;
+      color: var(--muted, #888);
+      border-radius: 6px;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-report:hover { border-color: #ef4444; color: #ef4444; }
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.1rem 0.45rem;
+      vertical-align: middle;
+      letter-spacing: 0.02em;
+    }
+  </style>
 </head>
 <body>
 
@@ -353,7 +381,7 @@
         <div class="module-card" data-id="${m.id}" data-tags="${(m.tags || []).join(',')}">
           <div class="module-card-top">
             <div>
-              <h3 class="module-name">${escHtml(m.name)}</h3>
+              <h3 class="module-name">${escHtml(m.name)}${m.verified ? ' <span class="verified-badge" title="Verified by sintaxsaint — confirmed working">&#10003; Verified</span>' : ''}</h3>
               <span class="module-author">by ${escHtml(m.author)}</span>
             </div>
             <span class="version-chip">v${escHtml(m.version)}</span>
@@ -364,10 +392,13 @@
           </div>
           <div class="module-footer">
             <span class="module-downloads">&#11015;&#65039; ${Number(m.downloads).toLocaleString()}</span>
-            ${m.file_url
-              ? `<a class="btn btn-outline module-dl-btn" href="${escHtml(m.file_url)}" target="_blank" rel="noopener" onclick="bumpDownload('${escHtml(m.slug)}')">Download</a>`
-              : `<span class="module-no-url">URL pending</span>`
-            }
+            <div style="display:flex;gap:0.5rem;align-items:center">
+              ${m.file_url
+                ? `<a class="btn btn-outline module-dl-btn" href="${escHtml(m.file_url)}" target="_blank" rel="noopener" onclick="bumpDownload('${escHtml(m.slug)}')">Download</a>`
+                : `<span class="module-no-url">URL pending</span>`
+              }
+              <button class="btn-report" onclick="reportModule('${escHtml(m.id)}','${escHtml(m.name)}')" title="Report this module">&#9888;</button>
+            </div>
           </div>
         </div>
       `).join('');
@@ -389,6 +420,22 @@
       document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       filterModules();
+    }
+
+    async function reportModule(id, name) {
+      if (!db) { alert('Store not connected.'); return; }
+      const reason = prompt(`Report "${name}" — briefly describe the issue (optional):`);
+      if (reason === null) return; // user cancelled
+      const { data, error: fetchErr } = await db.from('modules').select('report_count').eq('id', id).single();
+      if (fetchErr) { alert('Could not submit report: ' + fetchErr.message); return; }
+      const { error } = await db.from('modules').update({
+        report_count : (data?.report_count || 0) + 1,
+      }).eq('id', id);
+      if (error) {
+        alert('Could not submit report: ' + error.message);
+      } else {
+        alert('Report submitted. Thanks!');
+      }
     }
 
     async function bumpDownload(slug) {
@@ -426,7 +473,7 @@
         tags,
         file_url    : document.getElementById('sub-url').value.trim() || null,
         readme      : document.getElementById('sub-readme').value.trim() || null,
-        approved    : false,
+        approved    : true,
         downloads   : 0,
       });
 
